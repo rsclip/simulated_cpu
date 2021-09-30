@@ -1,12 +1,15 @@
 mod ram;
+mod cpu;
+mod data;
 
-use ram::{RAM, Datum, Value, Address, Instruction};
+use ram::RAM;
+use data::{Datum, Value, Address, Instruction};
 
 /// Return a prepared RAM:
 /// 0   load value      4
 /// 1   add value       5
 /// 2   store value     6
-/// 3   stop            
+/// 3   jump            0
 /// 4   5               
 /// 5   6               
 /// 6                   
@@ -16,7 +19,7 @@ fn get_ram() -> RAM {
     ram.append(Address(0u8), Datum::DataInstruction(Instruction::new(0u8, Value::Address(Address(4u8)))))
         .append(Address(1u8), Datum::DataInstruction(Instruction::new(1u8, Value::Address(Address(5u8)))))
         .append(Address(2u8), Datum::DataInstruction(Instruction::new(2u8, Value::Address(Address(6u8)))))
-        .append(Address(3u8), Datum::DataInstruction(Instruction::new(3u8, Value::None)))
+        .append(Address(3u8), Datum::DataInstruction(Instruction::new(3u8, Value::Address(Address(0u8)))))
         .append(Address(4u8), Datum::DataValue(Value::Integer(5)))
         .append(Address(5u8), Datum::DataValue(Value::Integer(6)))
         .append(Address(6u8), Datum::DataValue(Value::None));

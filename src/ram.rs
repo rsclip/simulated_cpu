@@ -6,31 +6,14 @@
 //! | 0u8    | LOAD VAL    |
 //! | 1u8    | ADD VAL     |
 //! | 2u8    | STORE VAL   |
-//! | 3u8    | STOP        |
+//! | 3u8    | JUMP        |
+
+use crate::data::{Datum, Value, Address, Instruction};
 
 // fixed capacity but not memory size for simplicity
 pub struct RAM {
     pub data: Vec<Datum>,
     pub size: usize,
-}
-
-pub enum Datum {
-    DataValue(Value),
-    DataInstruction(Instruction),
-}
-
-pub enum Value {
-    Integer(usize),
-    String(String),
-    Address(Address),
-    None,
-}
-
-pub struct Address(pub u8);
-
-pub struct Instruction {
-    pub opcode: u8,
-    pub operand: Value,
 }
 
 impl RAM {
