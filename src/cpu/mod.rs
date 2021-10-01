@@ -7,6 +7,7 @@ use crate::ram::RAM;
 use components::{MAR, MDR, CIR, Accumulator};
 use crate::data::{Address, Datum};
 use log::*;
+use std::{thread, time};
 
 /// Main CPU struct
 #[derive(Debug)]
@@ -39,16 +40,20 @@ impl CPU {
         self
     }
 
-    pub fn start_cycle(&mut self) {
-        self.cycle();
+    /// Start the FDE CPU cycle, with a delay (ms) between
+    /// each cycle loop.
+    pub fn start_cycle(&mut self, delay: u64) {
+        self.cycle(time::Duration::from_millis(delay));
     }
 
-    fn cycle(&mut self) {
+    fn cycle(&mut self, delay: time::Duration) {
         loop {
             info!("-- Start of loop --\n{:#?}", self);
             self.fetch();
             self.decode();
             self.execute();
+            
+            thread::sleep(delay);
         }
     }
 
