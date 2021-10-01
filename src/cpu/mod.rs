@@ -1,6 +1,7 @@
 //! Central Processing Unit
 
 mod components;
+mod operations;
 
 use crate::ram::RAM;
 use components::{MAR, MDR, CIR, Accumulator};

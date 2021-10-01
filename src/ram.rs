@@ -1,12 +1,4 @@
 //! Main memory
-//! 
-//! opcodes:
-//! | opcode | instruction |
-//! |--------|-------------|
-//! | 0u8    | LOAD VAL    |
-//! | 1u8    | ADD VAL     |
-//! | 2u8    | STORE VAL   |
-//! | 3u8    | JUMP        |
 
 use crate::data::{Datum, Value, Address, Instruction};
 use std::collections::HashMap;
