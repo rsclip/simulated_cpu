@@ -22,3 +22,13 @@ pub struct Instruction {
     pub opcode: u8,
     pub operand: Value,
 }
+
+impl Address {
+    pub fn increment(&mut self) {
+        self.0 += 1u8;
+    }
+
+    pub fn decrement(&mut self) {
+        self.0 -= 1u8;
+    }
+}

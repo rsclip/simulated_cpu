@@ -22,11 +22,19 @@ impl MAR {
     pub fn new() -> MAR {
         MAR {address: None}
     }
+    
+    pub fn set(&mut self, address: Address) {
+        self.address = Some(address);
+    }
 }
 
 impl MDR {
     pub fn new() -> MDR {
         MDR {content: None}
+    }
+    
+    pub fn set(&mut self, content: Datum) {
+        self.content = Some(content);
     }
 }
 
@@ -34,10 +42,18 @@ impl CIR {
     pub fn new() -> CIR {
         CIR {instruction: None}
     }
+    
+    pub fn set(&mut self, instruction: Instruction) {
+        self.instruction = Some(instruction);
+    }
 }
 
 impl Accumulator {
     pub fn new() -> Accumulator {
         Accumulator {content: None}
+    }
+    
+    pub fn set(&mut self, content: Value) {
+        self.content = Some(content);
     }
 }

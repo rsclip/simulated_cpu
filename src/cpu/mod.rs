@@ -35,4 +35,27 @@ impl<'a> CPU<'a> {
         self.RAM = Some(RAM);
         self
     }
+
+    pub fn start_cycle(&self) {
+        self.cycle();
+    }
+
+    fn cycle(&self) {
+        self.fetch();
+        self.decode();
+        self.execute();
+        self.cycle();
+    }
+
+    fn fetch(&mut self) {
+        unimplemented!()
+    }
+
+    fn decode(&mut self) {
+        unimplemented!()
+    }
+
+    fn execute(&mut self) {
+        unimplemented!()
+    }
 }

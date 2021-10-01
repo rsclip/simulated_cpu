@@ -33,4 +33,5 @@ fn get_ram() -> RAM {
 fn main() {
     let ram = get_ram();
     let system = system::System::build(&ram);
+    system.CPU.start_cycle();
 }
