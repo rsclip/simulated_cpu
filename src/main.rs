@@ -1,6 +1,7 @@
 #![allow(non_snake_case)]
 
 extern crate log;
+extern crate pretty_env_logger;
 
 mod ram;
 mod cpu;
@@ -34,6 +35,8 @@ fn get_ram() -> RAM {
 }
 
 fn main() {
+    pretty_env_logger::init();
+
     let ram = get_ram();
     let mut system = system::System::build(ram);
     system.CPU.start_cycle(100u64);
