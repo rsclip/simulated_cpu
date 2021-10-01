@@ -48,7 +48,7 @@ impl CPU {
 
     fn cycle(&mut self, delay: time::Duration) {
         loop {
-            info!("-- Start of loop --\n{:#?}", self);
+            info!("-- Start of loop --\n{:#?}", self.RAM);
             self.fetch();
             self.decode();
             self.execute();
