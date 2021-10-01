@@ -5,18 +5,16 @@ use crate::cpu::CPU;
 use crate::ram::RAM;
 
 /// Acts as a sort of system bus
-pub struct System<'a> {
-    pub CPU: CPU<'a>,
-    pub RAM: &'a RAM,
+pub struct System {
+    pub CPU: CPU,
 }
 
-impl<'a> System<'a> {
-    pub fn build(RAM: &'a RAM) -> System<'a> {
+impl System {
+    pub fn build(RAM: RAM) -> System {
         let mut return_val = System {
             CPU: CPU::new(),
-            RAM,
         };
-        return_val.CPU.set_ram(&RAM);
+        return_val.CPU.set_ram(RAM);
         return_val
     }
 }

@@ -17,18 +17,17 @@ pub enum Datum {
     DataInstruction(Instruction),
 }
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub enum Value {
     Integer(usize),
-    String(String),
     Address(Address),
     None,
 }
 
-#[derive(PartialEq, Eq, Hash, Copy, Clone, Debug)]
+#[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
 pub struct Address(pub u8);
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub struct Instruction {
     pub opcode: u8,
     pub operand: Value,

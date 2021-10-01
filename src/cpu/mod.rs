@@ -8,8 +8,8 @@ use components::{MAR, MDR, CIR, Accumulator};
 use crate::data::{Address, Datum};
 
 /// Main CPU struct
-pub struct CPU<'a> {
-    pub RAM: Option<&'a RAM>,
+pub struct CPU {
+    pub RAM: Option<RAM>,
 
     // components
     program_counter: Address,   // stores the next instruction's mem address
@@ -19,9 +19,9 @@ pub struct CPU<'a> {
     accumulator: Accumulator,           // stores the arithmetic or logic result
 }
 
-impl<'a> CPU<'a> {
+impl CPU {
     /// Create a new CPU instance
-    pub fn new() -> CPU<'a> {
+    pub fn new() -> CPU {
         CPU {
             RAM: None,
             program_counter: Address(0u8),
@@ -32,7 +32,7 @@ impl<'a> CPU<'a> {
         }
     }
 
-    pub fn set_ram(&mut self, RAM: &'a RAM) -> &mut Self {
+    pub fn set_ram(&mut self, RAM: RAM) -> &mut Self {
         self.RAM = Some(RAM);
         self
     }
@@ -82,17 +82,17 @@ impl<'a> CPU<'a> {
 
         // match the opcode and execute
         match instruction.opcode {
-            0u8 => operations::LOAD_VAL(instruction.operand),
-            1u8 => operations::ADD_VAL(instruction.operand),
-            2u8 => operations::STORE_VAL(instruction.operand),
-            3u8 => operations::JUMP(instruction.operand),
+            0u8 => operations::LOAD_VAL(self, instruction.operand),
+            1u8 => operations::ADD_VAL(self, instruction.operand),
+            2u8 => operations::STORE_VAL(self, instruction.operand),
+            3u8 => operations::JUMP(self, instruction.operand),
             _ => panic!("invalid opcode")
         };
     }
 
-    fn get_ram(&self) -> &'a RAM {
+    fn get_ram(&self) -> &RAM {
         match self.RAM {
-            Some(x) => x,
+            Some(ref x) => x,
             None => panic!("No RAM in CPU")
         }
     }

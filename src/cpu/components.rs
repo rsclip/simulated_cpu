@@ -45,7 +45,7 @@ impl MDR {
     }
 
     pub fn get(&self) -> Datum {
-        match self.content {
+        match &self.content {
             Some(x) => x.clone(),
             None => panic!("Empty register")
         }
@@ -83,5 +83,20 @@ impl Accumulator {
             Some(x) => x.clone(),
             None => panic!("Empty register")
         }
+    }
+
+    /// Add a value to it
+    pub fn add(&mut self, other: Value) {
+        let other_val = match other {
+            Value::Integer(val) => val,
+            _ => panic!("invalid value type")
+        };
+
+        let current_val = match self.get() {
+            Value::Integer(x) => x,
+            _ => panic!("cannot add Value::Integer to current value in accumulator (non-integer)")
+        };
+
+        self.set(Value::Integer(current_val + other_val));
     }
 }
