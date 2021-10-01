@@ -6,8 +6,10 @@ mod operations;
 use crate::ram::RAM;
 use components::{MAR, MDR, CIR, Accumulator};
 use crate::data::{Address, Datum};
+use log::*;
 
 /// Main CPU struct
+#[derive(Debug)]
 pub struct CPU {
     pub RAM: Option<RAM>,
 
@@ -43,6 +45,7 @@ impl CPU {
 
     fn cycle(&mut self) {
         loop {
+            info!("-- Start of loop --\n{:#?}", self);
             self.fetch();
             self.decode();
             self.execute();

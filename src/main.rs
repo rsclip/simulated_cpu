@@ -1,5 +1,7 @@
 #![allow(non_snake_case)]
 
+extern crate log;
+
 mod ram;
 mod cpu;
 mod data;
@@ -7,6 +9,7 @@ mod system;
 
 use ram::RAM;
 use data::{Datum, Value, Address, Instruction};
+use log::{info};
 
 /// Return a prepared RAM:
 /// 0   load value      4
@@ -34,4 +37,5 @@ fn main() {
     let ram = get_ram();
     let mut system = system::System::build(ram);
     system.CPU.start_cycle();
+    info!("ending program");
 }

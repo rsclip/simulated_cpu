@@ -2,8 +2,10 @@
 
 use crate::data::{Datum, Value, Address, Instruction};
 use std::collections::HashMap;
+use log::*;
 
 // fixed capacity but not memory size for simplicity
+#[derive(Debug)]
 pub struct RAM {
     pub data: HashMap<Address, Datum>,
     pub size: usize,
@@ -20,6 +22,7 @@ impl RAM {
 
     /// Set data onto RAM and return itself
     pub fn set(&mut self, address: Address, data: Datum) -> &mut Self {
+        info!("Setting address {:?} to data {:?}", address, data);
         self.data.insert(address, data);
         self.size += 1;
         self
