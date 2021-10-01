@@ -1,5 +1,8 @@
 //! Structs containing data stored in RAM
 
+use std::cmp::Eq;
+use std::hash::Hash;
+
 pub enum Datum {
     DataValue(Value),
     DataInstruction(Instruction),
@@ -12,6 +15,7 @@ pub enum Value {
     None,
 }
 
+#[derive(PartialEq, Eq, Hash)]
 pub struct Address(pub u8);
 
 pub struct Instruction {
