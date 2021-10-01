@@ -3,11 +3,13 @@
 use std::cmp::Eq;
 use std::hash::Hash;
 
+#[derive(Clone)]
 pub enum Datum {
     DataValue(Value),
     DataInstruction(Instruction),
 }
 
+#[derive(Clone)]
 pub enum Value {
     Integer(usize),
     String(String),
@@ -15,9 +17,10 @@ pub enum Value {
     None,
 }
 
-#[derive(PartialEq, Eq, Hash)]
+#[derive(PartialEq, Eq, Hash, Copy, Clone, Debug)]
 pub struct Address(pub u8);
 
+#[derive(Clone)]
 pub struct Instruction {
     pub opcode: u8,
     pub operand: Value,

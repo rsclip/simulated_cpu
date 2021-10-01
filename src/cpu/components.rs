@@ -26,6 +26,13 @@ impl MAR {
     pub fn set(&mut self, address: Address) {
         self.address = Some(address);
     }
+
+    pub fn get(&self) -> Address {
+        match self.address {
+            Some(x) => x.clone(),
+            None => panic!("Empty register")
+        }
+    }
 }
 
 impl MDR {
@@ -35,6 +42,13 @@ impl MDR {
     
     pub fn set(&mut self, content: Datum) {
         self.content = Some(content);
+    }
+
+    pub fn get(&self) -> Datum {
+        match self.content {
+            Some(x) => x.clone(),
+            None => panic!("Empty register")
+        }
     }
 }
 
@@ -46,6 +60,13 @@ impl CIR {
     pub fn set(&mut self, instruction: Instruction) {
         self.instruction = Some(instruction);
     }
+
+    pub fn get(&self) -> Instruction {
+        match self.instruction {
+            Some(x) => x.clone(),
+            None => panic!("Empty register")
+        }
+    }
 }
 
 impl Accumulator {
@@ -55,5 +76,12 @@ impl Accumulator {
     
     pub fn set(&mut self, content: Value) {
         self.content = Some(content);
+    }
+
+    pub fn get(&self) -> Value {
+        match self.content {
+            Some(x) => x.clone(),
+            None => panic!("Empty register")
+        }
     }
 }

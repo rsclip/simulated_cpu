@@ -36,11 +36,11 @@ impl<'a> CPU<'a> {
         self
     }
 
-    pub fn start_cycle(&self) {
+    pub fn start_cycle(&mut self) {
         self.cycle();
     }
 
-    fn cycle(&self) {
+    fn cycle(&mut self) {
         self.fetch();
         self.decode();
         self.execute();
@@ -48,7 +48,20 @@ impl<'a> CPU<'a> {
     }
 
     fn fetch(&mut self) {
-        unimplemented!()
+        // get the memory address of the next instruction
+        // store in the memory address register
+        self.memory_address_register.set(self.program_counter);
+
+        // get the address' contents and store in the MDR
+        self.memory_data_register.set(
+            match self.get_ram().from_addr(self.memory_address_register.get()) {
+                Ok(x) => x,
+                Err(_) => panic!("failed to get memory address contents")
+            }
+        );
+
+        // increment program counter for the next fetch
+        self.program_counter.increment();
     }
 
     fn decode(&mut self) {
@@ -57,5 +70,12 @@ impl<'a> CPU<'a> {
 
     fn execute(&mut self) {
         unimplemented!()
+    }
+
+    fn get_ram(&self) -> &'a RAM {
+        match self.RAM {
+            Some(x) => x,
+            None => panic!("No RAM in CPU")
+        }
     }
 }

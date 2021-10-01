@@ -32,6 +32,14 @@ impl RAM {
         self.size += 1;
         self
     }
+
+    /// Get the contents at the address
+    pub fn from_addr(&self, address: Address) -> Result<Datum, String> {
+        match self.data.get(&address) {
+            Some(x) => Ok(x.clone()),
+            None => Err(format!("Couldn't find data at address {:?}", address.0)),
+        }
+    }
 }
 
 impl Instruction {
