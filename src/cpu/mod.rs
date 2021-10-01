@@ -42,10 +42,11 @@ impl CPU {
     }
 
     fn cycle(&mut self) {
-        self.fetch();
-        self.decode();
-        self.execute();
-        self.cycle();
+        loop {
+            self.fetch();
+            self.decode();
+            self.execute();
+        }
     }
 
     fn fetch(&mut self) {
