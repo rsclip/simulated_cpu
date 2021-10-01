@@ -78,7 +78,16 @@ impl<'a> CPU<'a> {
     }
 
     fn execute(&mut self) {
-        unimplemented!()
+        let instruction = self.current_instruction_register.get();
+
+        // match the opcode and execute
+        match instruction.opcode {
+            0u8 => operations::LOAD_VAL(instruction.operand),
+            1u8 => operations::ADD_VAL(instruction.operand),
+            2u8 => operations::STORE_VAL(instruction.operand),
+            3u8 => operations::JUMP(instruction.operand),
+            _ => panic!("invalid opcode")
+        };
     }
 
     fn get_ram(&self) -> &'a RAM {
