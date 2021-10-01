@@ -34,10 +34,12 @@ pub struct Instruction {
 }
 
 impl Address {
+    #[allow(dead_code)]
     pub fn increment(&mut self) {
         self.0 += 1u8;
     }
 
+    #[allow(dead_code)]
     pub fn decrement(&mut self) {
         self.0 -= 1u8;
     }
