@@ -36,6 +36,6 @@ fn get_ram() -> RAM {
 fn main() {
     let ram = get_ram();
     let mut system = system::System::build(ram);
-    system.CPU.start_cycle();
+    system.CPU.start_cycle(100u64);
     info!("ending program");
 }
