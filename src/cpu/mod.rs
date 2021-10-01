@@ -4,7 +4,7 @@ mod components;
 
 use crate::ram::RAM;
 use components::{MAR, MDR, CIR, Accumulator};
-use crate::data::{Address};
+use crate::data::{Address, Datum};
 
 /// Main CPU struct
 pub struct CPU<'a> {
@@ -65,7 +65,15 @@ impl<'a> CPU<'a> {
     }
 
     fn decode(&mut self) {
-        unimplemented!()
+        // from the content in the MDR, decode it and store the instruction
+        // fortunately there isnt much to decode as Instruction is a struct
+        // containing the opcode and operand as separate fields
+        self.current_instruction_register.set(
+            match self.memory_data_register.get() {
+                Datum::DataValue(_) => panic!("attempted to decode a value"),
+                Datum::DataInstruction(x) => x,
+            }
+        );
     }
 
     fn execute(&mut self) {
